@@ -1,0 +1,40 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Odoo
+*.pyc
+*.pyo
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Database
+db_data/
+*.log
+*.sql
+*.dump
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+convert_favicon.py
+fix_button_color.py
+
+# Node modules (if any)
+node_modules/
