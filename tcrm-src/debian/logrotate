@@ -1,0 +1,5 @@
+/var/log/tcrm/*.log {
+    copytruncate
+    missingok
+    notifempty
+}

@@ -2,7 +2,7 @@
 
 **Connect . Grow . Win**
 
-A white-labeled, multi-tenant SaaS platform based on Odoo Community Edition, fully customized with TCRM branding.
+A white-labeled, multi-tenant SaaS platform based on tcrm Community Edition, fully customized with TCRM branding.
 
 ## Features
 
@@ -37,7 +37,7 @@ A white-labeled, multi-tenant SaaS platform based on Odoo Community Edition, ful
 3. **Install dependencies:**
    ```bash
    pip install psycopg2-binary pypiwin32
-   pip install -r odoo-src\requirements.txt
+   pip install -r tcrm-src\requirements.txt
    ```
 
 4. **Start PostgreSQL:**
@@ -47,12 +47,12 @@ A white-labeled, multi-tenant SaaS platform based on Odoo Community Edition, ful
 
 5. **Initialize master database:**
    ```bash
-   .\venv\Scripts\python odoo-src\odoo-bin -c tcrm.conf -d tcrm_master -i base --without-demo=all --stop-after-init
+   .\venv\Scripts\python tcrm-src\tcrm-bin -c tcrm.conf -d tcrm_master -i base --without-demo=all --stop-after-init
    ```
 
 6. **Start TCRM server:**
    ```bash
-   .\venv\Scripts\python odoo-src\odoo-bin -c tcrm.conf
+   .\venv\Scripts\python tcrm-src\tcrm-bin -c tcrm.conf
    ```
 
 ## Access
@@ -74,12 +74,12 @@ The `tcrm.conf` file contains:
 
 ```
 C:\D\crm\
-├── odoo-src/              # Odoo source code (modified)
+├── tcrm-src/              # tcrm source code (modified)
 ├── custom_addons/         # TCRM custom modules
 │   └── tcrm_saas_core/   # SaaS tenant management
 ├── TCRM/                  # Brand assets (logos, fonts)
 ├── db_data/               # PostgreSQL data directory
-├── tcrm.conf              # Odoo configuration
+├── tcrm.conf              # tcrm configuration
 └── venv/                  # Python virtual environment
 ```
 
@@ -113,7 +113,7 @@ Multi-tenant SaaS management module with:
 ### Updating Web Assets
 After modifying SCSS or JS files:
 ```bash
-.\venv\Scripts\python odoo-src\odoo-bin -c tcrm.conf -d tcrm_master -u web --stop-after-init
+.\venv\Scripts\python tcrm-src\tcrm-bin -c tcrm.conf -d tcrm_master -u web --stop-after-init
 ```
 
 ### Creating New Tenant
@@ -121,7 +121,7 @@ Access TCRM Master menu → Tenants → Create
 
 ## License
 
-Based on Odoo Community Edition (LGPL-3)
+Based on tcrm Community Edition (LGPL-3)
 TCRM Customizations © 2026
 
 ## Support

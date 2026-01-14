@@ -1,0 +1,14 @@
+[Unit]
+Description=tcrm Open Source ERP and CRM
+After=network.target
+
+[Service]
+Type=simple
+User=tcrm
+Group=tcrm
+ExecStart=/usr/bin/tcrm --config /etc/tcrm/tcrm.conf --logfile /var/log/tcrm/tcrm-server.log
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
+

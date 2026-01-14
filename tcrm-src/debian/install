@@ -1,0 +1,2 @@
+debian/tcrm.conf /etc/tcrm
+README.md /usr/share/doc/tcrm

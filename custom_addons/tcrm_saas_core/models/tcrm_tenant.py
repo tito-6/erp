@@ -1,5 +1,5 @@
-from odoo import models, fields, api
-import odoo.service.db
+from tcrm import models, fields, api
+import tcrm.service.db
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -21,7 +21,7 @@ class TcRmTenant(models.Model):
         return record
 
     def _create_tenant_db(self, db_name):
-        if odoo.service.db.exp_db_exist(db_name):
+        if tcrm.service.db.exp_db_exist(db_name):
             _logger.warning(f"Database {db_name} already exists.")
             return
 
@@ -29,11 +29,11 @@ class TcRmTenant(models.Model):
             _logger.info(f"Creating database {db_name}...")
             # Create DB with admin password 'admin' (default for now)
             # Note: In production, use strong passwords and storing them securely.
-            odoo.service.db.exp_create_database(db_name, demo=False, lang='en_US')
+            tcrm.service.db.exp_create_database(db_name, demo=False, lang='en_US')
             _logger.info(f"Database {db_name} created successfully.")
             
             # Optional: Install base modules using exp_install_module?
-            # Or just let it be handled by Odoo's auto-init?
+            # Or just let it be handled by Tcrm's auto-init?
             # Generally exp_create_database installs base.
             
         except Exception as e:
