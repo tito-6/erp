@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_propertio_project,propertio.project,model_propertio_project,base.group_user,1,1,1,1
+access_propertio_block,propertio.block,model_propertio_block,base.group_user,1,1,1,1
+access_propertio_unit,propertio.unit,model_propertio_unit,base.group_user,1,1,1,1
+access_propertio_feature,propertio.feature,model_propertio_feature,base.group_user,1,1,1,1
+access_propertio_sale,propertio.sale,model_propertio_sale,base.group_user,1,1,1,1
+access_propertio_installment,propertio.installment,model_propertio_installment,base.group_user,1,1,1,1
+access_propertio_sale_wizard,propertio.sale.wizard,model_propertio_sale_wizard,base.group_user,1,1,1,1
+access_propertio_payment,propertio.payment,model_propertio_payment,base.group_user,1,1,1,1
+access_propertio_unit_category,propertio.unit.category,model_propertio_unit_category,base.group_user,1,1,1,1
+access_propertio_unit_status,propertio.unit.status,model_propertio_unit_status,base.group_user,1,1,1,1
+access_propertio_project_type,propertio.project.type,model_propertio_project_type,base.group_user,1,1,1,1
+access_propertio_project_stage,propertio.project.stage,model_propertio_project_stage,base.group_user,1,1,1,1
+access_propertio_sale_stage,propertio.sale.stage,model_propertio_sale_stage,base.group_user,1,1,1,1
+access_propertio_report_export,propertio.report.export,model_propertio_report_export,base.group_user,1,1,1,1
+access_propertio_print_options,propertio.print.options,model_propertio_print_options,base.group_user,1,1,1,1

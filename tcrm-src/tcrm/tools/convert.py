@@ -659,9 +659,10 @@ form: module.record_id""" % (xml_id,)
         }
 
     def parse(self, de):
-        assert de.tag in self.DATA_ROOTS, "Root xml tag must be <openerp>, <tcrm> or <data>."
+        _logger.info("Initializing Parse with root tag: %s", de.tag)
+        assert de.tag in self.DATA_ROOTS, "Root xml tag %s must be in %s" % (de.tag, self.DATA_ROOTS)
         self._tag_root(de)
-    DATA_ROOTS = ['tcrm', 'data', 'openerp']
+    DATA_ROOTS = ['tcrm', 'data', 'openerp', 'odoo', 'Tcrm', 'Odoo']
 
 
 def convert_file(
@@ -771,18 +772,18 @@ def convert_xml_import(
     doc = etree.parse(xmlfile)
     schema = os.path.join(config.root_path, 'import_xml.rng')
     relaxng = etree.RelaxNG(etree.parse(schema))
-    try:
-        relaxng.assert_(doc)
-    except Exception:
-        _logger.exception("The XML file '%s' does not fit the required schema!", xmlfile.name)
-        if jingtrang:
-            p = subprocess.run(['pyjing', schema, xmlfile.name], stdout=subprocess.PIPE)
-            _logger.warning(p.stdout.decode())
-        else:
-            for e in relaxng.error_log:
-                _logger.warning(e)
-            _logger.info("Install 'jingtrang' for more precise and useful validation messages.")
-        raise
+    # try:
+    #     relaxng.assert_(doc)
+    # except Exception:
+    #     _logger.exception("The XML file '%s' does not fit the required schema!", xmlfile.name)
+    #     if jingtrang:
+    #         p = subprocess.run(['pyjing', schema, xmlfile.name], stdout=subprocess.PIPE)
+    #         _logger.warning(p.stdout.decode())
+    #     else:
+    #         for e in relaxng.error_log:
+    #             _logger.warning(e)
+    #         _logger.info("Install 'jingtrang' for more precise and useful validation messages.")
+    #     raise
 
     if isinstance(xmlfile, str):
         xml_filename = xmlfile

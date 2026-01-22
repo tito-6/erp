@@ -1,0 +1,16 @@
+<odoo>
+    <record id="view_propertio_sale_search" model="ir.ui.view">
+        <field name="name">propertio.sale.search</field>
+        <field name="model">propertio.sale</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Contract No"/>
+                <field name="partner_id"/>
+                <field name="unit_id"/>
+                <field name="project_id"/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmed" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
+            </search>
+        </field>
+    </record>
+</odoo>

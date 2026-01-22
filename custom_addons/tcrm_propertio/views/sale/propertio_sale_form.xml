@@ -1,0 +1,204 @@
+<odoo>
+    <record id="view_propertio_sale_form" model="ir.ui.view">
+        <field name="name">propertio.sale.form</field>
+        <field name="model">propertio.sale</field>
+        <field name="arch" type="xml">
+            <form string="Sale Contract" chatter_position="bottom">
+                <header>
+                    <button name="action_confirm" string="Confirm Sale" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="%(tcrm_propertio.action_propertio_print_options)d" string="Print / Export" type="action" class="btn-secondary" icon="fa-print" context="{'default_sale_id': id}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,cancel"/>
+                </header>
+                <sheet class="o_form_sheet_full_width oe_form_sheet_full_width" style="max-width: 100% !important; width: 100% !important;">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_unit" type="object" class="oe_stat_button" icon="fa-building-o">
+                             <div class="o_stat_info">
+                                <span class="o_stat_text">Property</span>
+                             </div>
+                        </button>
+                        <button name="action_view_customer" type="object" class="oe_stat_button" icon="fa-user">
+                             <div class="o_stat_info">
+                                <span class="o_stat_text">Customer</span>
+                             </div>
+                        </button>
+                        <button name="action_view_payments" type="object" class="oe_stat_button" icon="fa-credit-card">
+                             <div class="o_stat_info">
+                                <span class="o_stat_text">Payments</span>
+                             </div>
+                        </button>
+                        <button name="action_view_installments" type="object" class="oe_stat_button" icon="fa-money" invisible="state == 'draft'">
+                             <div class="o_stat_info">
+                                <span class="o_stat_text">Collections</span>
+                             </div>
+                        </button>
+                    </div>
+
+                    <widget name="web_ribbon" title="Sold" bg_color="bg-success" invisible="state != 'confirmed'"/>
+                    <widget name="web_ribbon" title="Cancelled" bg_color="bg-danger" invisible="state != 'cancel'"/>
+
+                    <div class="oe_title">
+                        <label for="name" string="Contract Ref"/>
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                        <h3>
+                            <label for="contract_no" string="Contract No"/>
+                            <field name="contract_no" class="oe_inline" placeholder="e.g. CON-2025-001"/>
+                        </h3>
+                    </div>
+
+                    <group>
+                        <group name="left_header">
+                            <field name="partner_id" widget="res_partner_many2one" context="{'show_address': 1}" options='{"always_reload": True}'/>
+                            <field name="unit_id" options="{'no_create': True}"/>
+                            <field name="project_id"/>
+                            <field name="date_sale"/>
+                        </group>
+                        <group name="right_header">
+                            <field name="sale_price" widget="monetary" options="{'currency_field': 'currency_id'}" style="font-size: 1.25rem; font-weight: bold; color: #1f2937;"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="total_paid" widget="monetary" decoration-success="total_paid == sale_price"/>
+                            <field name="balance" widget="monetary" invisible="balance == 0" decoration-danger="balance > 0"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Payment Plan" name="payment_plan">
+                            <div class="mb-2">
+                                <button name="action_rebalance_plan" string="Auto-Balance / Add Remainder" type="object" class="btn-warning btn-sm" icon="fa-balance-scale"/>
+                            </div>
+                             <field name="installment_ids" mode="list" context="{'default_sale_id': id}">
+                                <list string="Installments" editable="bottom" decoration-info="payment_status=='upcoming'" decoration-danger="payment_status=='overdue'" decoration-success="payment_status=='paid'">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="date_due"/>
+                                    <field name="name"/>
+                                    <field name="type"/>
+                                    <field name="amount" sum="Total"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                    <field name="amount_paid" sum="Paid"/>
+                                    <field name="residual" sum="Remaining"/>
+                                    <field name="payment_status" widget="badge" decoration-success="payment_status == 'paid'" decoration-warning="payment_status == 'upcoming'" decoration-danger="payment_status == 'overdue'" decoration-muted="payment_status == 'future'"/>
+                                    <field name="is_paid" column_invisible="1"/>
+                                </list>
+                            </field>
+                            <group class="mt-2">
+                                <group>
+                                    <field name="calc_discount_amount"/>
+                                    <field name="discount_amount"/>
+                                </group>
+                                <group>
+                                    <field name="calc_maturity_diff"/>
+                                    <field name="maturity_diff"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="General Info" name="general_info">
+                            <group>
+                                <group string="Customer Information">
+                                    <field name="customer_pid"/>
+                                    <field name="customer_passport"/>
+                                    <field name="father_name"/>
+                                    <field name="spouse_name"/>
+                                </group>
+                                <group string="Sale Details">
+                                    <field name="contract_date"/>
+                                    <field name="reserve_date"/>
+                                    <field name="is_project_active"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Organization">
+                                    <field name="sales_office"/>
+                                    <field name="department_name"/>
+                                    <field name="accounting_code"/>
+                                    <field name="status_detail"/>
+                                </group>
+                                <group string="Category">
+                                    <field name="is_vip"/>
+                                    <field name="vip_note" invisible="not is_vip"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Unit Specs" name="unit_details">
+                             <group>
+                                <group>
+                                    <field name="block_id"/>
+                                    <field name="entrance"/>
+                                    <field name="floor"/>
+                                    <field name="facade"/>
+                                    <field name="view_type"/>
+                                    <field name="property_category_id"/>
+                                    <field name="status_id"/>
+                                </group>
+                                <group>
+                                    <field name="gross_m2"/>
+                                    <field name="net_m2"/>
+                                    <field name="general_gross_m2"/>
+                                    <field name="balcony_m2"/>
+                                    <field name="terrace_m2"/>
+                                    <field name="garden_m2"/>
+                                </group>
+                            </group>
+                            <group string="Extras">
+                                <field name="properties" widget="properties"/>
+                            </group>
+                        </page>
+
+                        <page string="Legal &amp; Bank" name="documents">
+                            <group>
+                                <group string="Notary">
+                                    <field name="is_notarized"/>
+                                    <field name="notary_no" invisible="not is_notarized"/>
+                                    <field name="notary_date" invisible="not is_notarized"/>
+                                </group>
+                                <group string="Finance">
+                                    <field name="bank_approved"/>
+                                    <field name="bank_approval_date" invisible="not bank_approved"/>
+                                    <field name="bank_doc_status"/>
+                                </group>
+                            </group>
+                            <field name="notary_note" placeholder="Legal/Notary Notes..."/>
+                        </page>
+
+                        <page string="Team" name="sales_team">
+                            <group>
+                                <group string="Internal">
+                                    <field name="sales_person_id" widget="many2one_avatar_user"/>
+                                    <field name="sales_person_2_id" widget="many2one_avatar_user"/>
+                                    <field name="contact_person_id"/>
+                                    <field name="activity_person_id"/>
+                                </group>
+                                <group string="External">
+                                    <field name="agency_id"/>
+                                    <field name="agency_2_id"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                         <page string="Technical Financials" name="financial_details">
+                            <group>
+                                <group>
+                                    <field name="rate_tcmb"/>
+                                    <field name="rate_down_payment"/>
+                                    <field name="rate_installment"/>
+                                </group>
+                                <group>
+                                    <field name="invoice_status"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!--
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+                -->
+            </form>
+        </field>
+    </record>
+</odoo>

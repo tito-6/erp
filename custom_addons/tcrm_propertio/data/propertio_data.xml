@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sale Stages -->
+        <record id="stage_draft" model="propertio.sale.stage">
+            <field name="name">Draft</field>
+            <field name="sequence">10</field>
+            <field name="properties_definition">[
+                {"name": "contract_type", "type": "selection", "string": "Contract Type", "selection": [["standard", "Standard"], ["vip", "VIP"]]},
+                {"name": "initial_deposit_received", "type": "boolean", "string": "Initial Deposit Received?"}
+            ]</field>
+        </record>
+
+        <record id="stage_legal" model="propertio.sale.stage">
+            <field name="name">Legal Review</field>
+            <field name="sequence">20</field>
+            <field name="properties_definition">[
+                {"name": "lawyer_name", "type": "char", "string": "Lawyer Name"},
+                {"name": "documents_verified", "type": "boolean", "string": "Documents Verified?"},
+                {"name": "risk_level", "type": "selection", "string": "Risk Level", "selection": [["low", "Low"], ["medium", "Medium"], ["high", "High"]]}
+            ]</field>
+        </record>
+
+        <record id="stage_signed" model="propertio.sale.stage">
+            <field name="name">Signed</field>
+            <field name="sequence">30</field>
+        </record>
+
+        <record id="stage_completed" model="propertio.sale.stage">
+            <field name="name">Completed</field>
+            <field name="sequence">40</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,62 @@
+<odoo>
+    <record id="view_propertio_payment_form" model="ir.ui.view">
+        <field name="name">propertio.payment.form</field>
+        <field name="model">propertio.payment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_post" string="Post Payment" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_cancel" string="Cancel" type="object" invisible="state == 'cancel'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="sale_id"/>
+                                <field name="payment_method"/>
+                            </group>
+                        </div>
+                        <div class="col-6">
+                            <group>
+                                <field name="payment_date"/>
+                                <field name="currency_id"/>
+                                <field name="amount"/>
+                                <label for="exchange_rate"/>
+                                <div>
+                                    <field name="exchange_rate" class="oe_inline"/>
+                                </div>
+                                <field name="covered_amount"/>
+                            </group>
+                        </div>
+                    </div>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_propertio_payment_tree" model="ir.ui.view">
+        <field name="name">propertio.payment.tree</field>
+        <field name="model">propertio.payment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="payment_date"/>
+                <field name="partner_id"/>
+                <field name="sale_id"/>
+                <field name="amount"/>
+                <field name="currency_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+</odoo>

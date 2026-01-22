@@ -1,0 +1,81 @@
+<odoo>
+    <!-- Project View -->
+    <record id="view_propertio_project_form" model="ir.ui.view">
+        <field name="name">propertio.project.form</field>
+        <field name="model">propertio.project</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Project Name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="city"/>
+                            <field name="type_id" options="{'no_create': False}"/>
+                            <field name="stage_id"/>
+                        </group>
+                        <group>
+                            <field name="gdv"/>
+                            <field name="unit_count"/>
+                            <field name="properties" widget="properties"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Amenities &amp; Features">
+                            <group>
+                                <group string="Standard Amenities">
+                                    <field name="standard_feature_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                                </group>
+                                <group string="Available Upgrades">
+                                    <field name="extra_feature_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Units Inventory">
+                            <field name="unit_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="block_id"/>
+                                    <field name="floor"/>
+                                    <field name="category_id"/>
+                                    <field name="list_price"/>
+                                    <field name="state" widget="badge" decoration-info="state == 'available'" decoration-success="state == 'sold'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Blocks">
+                            <field name="block_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_propertio_project_tree" model="ir.ui.view">
+        <field name="name">propertio.project.tree</field>
+        <field name="model">propertio.project</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="city"/>
+                <field name="type_id"/>
+                <field name="stage_id"/>
+                <field name="unit_count"/>
+                <field name="gdv" sum="Total GDV"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_propertio_project" model="ir.actions.act_window">
+        <field name="name">Projects</field>
+        <field name="res_model">propertio.project</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="menu_project" action="action_propertio_project" parent="menu_propertio_inventory" sequence="10"/>
+</odoo>

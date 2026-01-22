@@ -1,0 +1,117 @@
+<odoo>
+    <!-- Unit View -->
+    <record id="view_propertio_unit_form" model="ir.ui.view">
+        <field name="name">propertio.unit.form</field>
+        <field name="model">propertio.unit</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="available,option,sold,handover"/>
+                </header>
+                <sheet style="max-width: 100% !important; width: 100% !important;">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_sales_history" type="object" class="oe_stat_button" icon="fa-history">
+                             <div class="o_stat_info">
+                                <span class="o_stat_text">Sales History</span>
+                             </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Unit Number"/></h1>
+                        <h3>
+                            <field name="project_id" readonly="1" options="{'no_open': True}"/> 
+                            <span> / </span>
+                            <field name="block_id" readonly="1" options="{'no_open': True}"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group string="Unit Info">
+                            <field name="project_id" invisible="1"/> <!-- Kept for domain if needed -->
+                            <field name="block_id" invisible="1"/>
+                            <field name="floor"/>
+                            <field name="entrance"/>
+                            <field name="category_id"/>
+                            <field name="status_id"/>
+                            <field name="view_type"/>
+                        </group>
+                        <group string="Pricing &amp; Specs">
+                            <field name="list_price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="gross_m2"/>
+                            <field name="properties" widget="properties"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="General Info" name="general_info">
+                            <group>
+                                <group string="Areas">
+                                    <field name="balcony_m2"/>
+                                    <field name="terrace_m2"/>
+                                    <field name="garden_m2"/>
+                                    <field name="floor_gross_m2"/>
+                                    <field name="ground_floor_m2"/>
+                                    <field name="normal_floor_m2"/>
+                                </group>
+                                <group string="Technical Specs">
+                                    <field name="facade"/>
+                                    <field name="unit_code"/>
+                                    <field name="tapu_ref"/>
+                                    <field name="parking_no"/>
+                                    <field name="parking_type"/>
+                                    <field name="accounting_code"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Features &amp; Upgrades" name="features">
+                            <group>
+                                <group string="Standard Amenities">
+                                    <field name="standard_feature_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': False}"/>
+                                </group>
+                                <group string="Available Upgrades">
+                                    <field name="extra_feature_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': False}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Financial Stats" name="financials">
+                             <group>
+                                <group>
+                                    <field name="sold_value"/>
+                                    <field name="collected_amount"/>
+                                    <field name="receivable_amount"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Documents" name="documents">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_propertio_unit_tree" model="ir.ui.view">
+        <field name="name">propertio.unit.tree</field>
+        <field name="model">propertio.unit</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="project_id"/>
+                <field name="block_id"/>
+                <field name="name"/>
+                <field name="floor"/>
+                <field name="category_id"/>
+                <field name="status_id"/>
+                <field name="gross_m2"/>
+                <field name="list_price"/>
+                <field name="state" widget="badge" decoration-success="state == 'available'" decoration-warning="state == 'option'" decoration-danger="state == 'sold'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_propertio_unit" model="ir.actions.act_window">
+        <field name="name">Units</field>
+        <field name="res_model">propertio.unit</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="menu_unit" action="action_propertio_unit" parent="menu_propertio_inventory" sequence="20"/>
+</odoo>
