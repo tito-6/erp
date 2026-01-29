@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+pandas
+numpy
+scikit-learn
+seaborn
+matplotlib
+langchain
+langchain-google-genai
+langchain-experimental
+psycopg2-binary
+python-dotenv
+sqlalchemy
+openpyxl
