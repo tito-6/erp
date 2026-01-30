@@ -9,9 +9,6 @@ from datetime import datetime, date, timedelta
 from tcrm import models, fields, api
 from tcrm.exceptions import UserError
 
-from ..reports.report_definitions import REPORT_REGISTRY
-from ..reports.report_generator import ReportGenerator
-
 
 class PropertioUnifiedReportWizard(models.TransientModel):
     _name = 'propertio.unified.report.wizard'
@@ -146,6 +143,9 @@ class PropertioUnifiedReportWizard(models.TransientModel):
     
     def _get_report_data_instance(self):
         """Get report data class instance"""
+        # Lazy import to avoid import-time failures
+        from ..reports.report_definitions import REPORT_REGISTRY
+        
         report_class = REPORT_REGISTRY.get(self.report_type)
         if not report_class:
             raise UserError(f'Report type {self.report_type} not found')
@@ -162,6 +162,9 @@ class PropertioUnifiedReportWizard(models.TransientModel):
     def action_generate_report(self):
         """Generate the report in selected format"""
         self.ensure_one()
+        
+        # Lazy import to avoid import-time failures
+        from ..reports.report_generator import ReportGenerator
         
         # Get report data
         report_data = self._get_report_data_instance()
