@@ -1,5 +1,5 @@
 [Unit]
-Description=Odoo Service to ensure ngrok is running
+Description=TCRM Service to ensure ngrok is running
 After=network.target
 StartLimitIntervalSec=0
 

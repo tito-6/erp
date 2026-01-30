@@ -71,7 +71,7 @@ class PropertioSaleWizard(models.TransientModel):
         try:
             data = self.env['res.currency'].get_tcmb_data(target_date)
             
-            # If data found, update Odoo rates as well implicitly? 
+            # If data found, update TCRM rates as well implicitly?
             # User requirement: "Auto fetch that date of exchange rate". 
             # Usually implies updating the system. Let's do it safe: Update wizard display first.
             if data:

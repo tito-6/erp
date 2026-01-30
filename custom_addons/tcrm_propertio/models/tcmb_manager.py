@@ -66,7 +66,7 @@ class ResCurrency(models.Model):
         return data
 
     def _update_tcmb_rates(self):
-        """ Cron job entry point: Fetch today's rates and update Odoo """
+        """ Cron job entry point: Fetch today's rates and update TCRM """
         today = fields.Date.today()
         data = self.get_tcmb_data(today)
         self._apply_rates(data, today)
@@ -86,7 +86,7 @@ class ResCurrency(models.Model):
             rate_val = row['buying'] # Using Buying Rate for conversion
             
             if code in currency_map and rate_val > 0:
-                odoo_rate = 1.0 / rate_val
+                tcrm_rate = 1.0 / rate_val
                 currency = currency_map[code]
                 
                 existing = self.env['res.currency.rate'].search([
@@ -99,8 +99,8 @@ class ResCurrency(models.Model):
                     self.env['res.currency.rate'].create({
                         'currency_id': currency.id,
                         'name': rate_date,
-                        'rate': odoo_rate,
+                        'rate': tcrm_rate,
                         'company_id': company.id
                     })
                 else:
-                    existing.rate = odoo_rate
+                    existing.rate = tcrm_rate

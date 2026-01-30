@@ -1,5 +1,5 @@
 [Unit]
-Description=Odoo LED Status Indicator: makes LEDs blink based on Odoo status
+Description=TCRM LED Status Indicator: makes LEDs blink based on TCRM status
 
 [Service]
 Type=simple

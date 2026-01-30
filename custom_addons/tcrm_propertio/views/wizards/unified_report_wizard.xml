@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Unified Report Wizard Form View -->
+    <record id="view_propertio_unified_report_wizard_form" model="ir.ui.view">
+        <field name="name">propertio.unified.report.wizard.form</field>
+        <field name="model">propertio.unified.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Export Reports">
+                <sheet>
+                    <div class="oe_title" invisible="state == 'done'">
+                        <h1>Export Report</h1>
+                        <p class="text-muted">Select report type, date range, and export format</p>
+                    </div>
+                    
+                    <div class="alert alert-success" role="alert" invisible="state != 'done'">
+                        <strong>Report Generated!</strong> Click Download to save the file.
+                    </div>
+                    
+                    <group invisible="state == 'done'">
+                        <group string="Report Selection">
+                            <field name="report_type" widget="selection"/>
+                        </group>
+                        <group string="Export Format">
+                            <field name="export_format" widget="radio" options="{'horizontal': true}"/>
+                        </group>
+                    </group>
+                    
+                    <group invisible="state == 'done'">
+                        <group string="Date Range">
+                            <field name="date_filter"/>
+                            <field name="date_from" invisible="date_filter != 'custom'"/>
+                            <field name="date_to" invisible="date_filter != 'custom'"/>
+                        </group>
+                        <group string="Additional Filters">
+                            <field name="project_id" options="{'no_create': True}"/>
+                            <field name="partner_id" options="{'no_create': True}"/>
+                            <field name="user_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Download Section -->
+                    <group invisible="state != 'done'">
+                        <group>
+                            <field name="file_name" readonly="1"/>
+                            <field name="file_data" filename="file_name" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <field name="state" invisible="1"/>
+                </sheet>
+                
+                <footer>
+                    <button string="Generate Report" name="action_generate_report" type="object" 
+                            class="btn-primary" invisible="state == 'done'"/>
+                    <button string="Download" name="action_download" type="object" 
+                            class="btn-primary" invisible="state != 'done'"/>
+                    <button string="View in Browser" name="action_view_html" type="object" 
+                            class="btn-secondary" invisible="state != 'done' or export_format != 'html'"/>
+                    <button string="New Report" name="action_reset" type="object" 
+                            class="btn-secondary" invisible="state != 'done'"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Action to open wizard -->
+    <record id="action_propertio_unified_report_wizard" model="ir.actions.act_window">
+        <field name="name">Export Reports</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    
+    <!-- Quick Report Actions for Common Reports -->
+    <record id="action_report_sales_collection" model="ir.actions.act_window">
+        <field name="name">Sales Collection Summary</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'sales_collection_summary'}</field>
+    </record>
+    
+    <record id="action_report_payment_plan" model="ir.actions.act_window">
+        <field name="name">Payment Plan</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'payment_plan_table'}</field>
+    </record>
+    
+    <record id="action_report_expected_payments" model="ir.actions.act_window">
+        <field name="name">Expected Payments</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'expected_payment_list'}</field>
+    </record>
+    
+    <record id="action_report_sales" model="ir.actions.act_window">
+        <field name="name">Sales Report</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'sales_report'}</field>
+    </record>
+    
+    <record id="action_report_employee_performance" model="ir.actions.act_window">
+        <field name="name">Employee Performance</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'employee_performance'}</field>
+    </record>
+    
+    <record id="action_report_cash_flow" model="ir.actions.act_window">
+        <field name="name">Cash Flow Statement</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'cash_flow_statement'}</field>
+    </record>
+    
+    <record id="action_report_customer_status" model="ir.actions.act_window">
+        <field name="name">Customer Status</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'customer_overall_status'}</field>
+    </record>
+    
+    <record id="action_report_construction_progress" model="ir.actions.act_window">
+        <field name="name">Construction Progress</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'construction_progress'}</field>
+    </record>
+</odoo>

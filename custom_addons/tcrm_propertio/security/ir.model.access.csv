@@ -14,3 +14,4 @@ access_propertio_project_stage,propertio.project.stage,model_propertio_project_s
 access_propertio_sale_stage,propertio.sale.stage,model_propertio_sale_stage,base.group_user,1,1,1,1
 access_propertio_report_export,propertio.report.export,model_propertio_report_export,base.group_user,1,1,1,1
 access_propertio_print_options,propertio.print.options,model_propertio_print_options,base.group_user,1,1,1,1
+access_propertio_unified_report_wizard,propertio.unified.report.wizard,model_propertio_unified_report_wizard,base.group_user,1,1,1,1

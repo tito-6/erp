@@ -90,6 +90,8 @@ def url_to_module_path(url):
         if match["type"] == "src":
             return "@%s%s" % (match['module'], url)
         elif match["type"] == "lib":
+            if url.startswith("/bootstrap/"):
+                return "@%s%s" % (match['module'], url)
             return "@%s/../lib%s" % (match['module'], url)
         else:
             return "@%s/../tests%s" % (match['module'], url)
@@ -719,11 +721,14 @@ def is_tcrm_module(url, content):
     :param content: source code
     :return: is this a tcrm module that need transpilation ?
     """
+    url_check = url if url.startswith('/') else f'/{url}'
     result = tcrm_MODULE_RE.match(content)
     if result and result['ignore']:
         return False
-    addon = url.split('/')[1]
-    if url.startswith(f'/{addon}/static/src') or url.startswith(f'/{addon}/static/tests'):
+    addon = url_check.split('/')[1]
+    if url_check.startswith('/web/static/lib/bootstrap/js/src/'):
+        return True
+    if url_check.startswith(f'/{addon}/static/src') or url_check.startswith(f'/{addon}/static/tests'):
         return True
     return bool(result)
 

@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Reports Menu -->
+    <menuitem id="menu_propertio_reports_center" 
+              name="Reports Center" 
+              parent="menu_propertio_reporting"
+              sequence="1"/>
+    
+    <!-- Export All Reports -->
+    <menuitem id="menu_report_export_wizard" 
+              name="Export Reports" 
+              action="action_propertio_unified_report_wizard"
+              parent="menu_propertio_reports_center" 
+              sequence="1"/>
+    
+    <!-- ============================================ -->
+    <!-- Collection & Payment Reports Category -->
+    <!-- ============================================ -->
+    <menuitem id="menu_report_category_collection" 
+              name="Collection &amp; Payments" 
+              parent="menu_propertio_reports_center" 
+              sequence="10"/>
+    
+    <menuitem id="menu_report_sales_collection_summary" 
+              name="1. Sales Collection Summary" 
+              action="action_report_sales_collection"
+              parent="menu_report_category_collection" 
+              sequence="1"/>
+    
+    <menuitem id="menu_report_payment_plan" 
+              name="14. Payment Plan Table" 
+              action="action_report_payment_plan"
+              parent="menu_report_category_collection" 
+              sequence="2"/>
+    
+    <menuitem id="menu_report_expected_payments" 
+              name="15. Expected Payment List" 
+              action="action_report_expected_payments"
+              parent="menu_report_category_collection" 
+              sequence="3"/>
+    
+    <!-- Action for Payment VAT Report -->
+    <record id="action_report_payment_vat" model="ir.actions.act_window">
+        <field name="name">Payment Plan (VAT)</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'payment_plan_vat'}</field>
+    </record>
+    
+    <menuitem id="menu_report_payment_vat" 
+              name="26. Payment Plan (VAT Included)" 
+              action="action_report_payment_vat"
+              parent="menu_report_category_collection" 
+              sequence="4"/>
+    
+    <!-- Action for Incoming Payments Chart -->
+    <record id="action_report_incoming_payments" model="ir.actions.act_window">
+        <field name="name">Incoming Payments Forecast</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'incoming_payments_chart'}</field>
+    </record>
+    
+    <menuitem id="menu_report_incoming_payments" 
+              name="8. Incoming &amp; Expected Payments" 
+              action="action_report_incoming_payments"
+              parent="menu_report_category_collection" 
+              sequence="5"/>
+    
+    <!-- ============================================ -->
+    <!-- Sales Reports Category -->
+    <!-- ============================================ -->
+    <menuitem id="menu_report_category_sales" 
+              name="Sales Reports" 
+              parent="menu_propertio_reports_center" 
+              sequence="20"/>
+    
+    <menuitem id="menu_report_sales_main" 
+              name="4. Sales Report" 
+              action="action_report_sales"
+              parent="menu_report_category_sales" 
+              sequence="1"/>
+    
+    <!-- Action for Type-Based Sales -->
+    <record id="action_report_type_based_sales" model="ir.actions.act_window">
+        <field name="name">Type-Based Sales Analysis</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'type_based_sales'}</field>
+    </record>
+    
+    <menuitem id="menu_report_type_based_sales" 
+              name="2. Type-Based Sales &amp; Inventory" 
+              action="action_report_type_based_sales"
+              parent="menu_report_category_sales" 
+              sequence="2"/>
+    
+    <!-- Action for Approval-Based Sales -->
+    <record id="action_report_approval_based" model="ir.actions.act_window">
+        <field name="name">Approval-Based Sales</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'approval_based_sales'}</field>
+    </record>
+    
+    <menuitem id="menu_report_approval_based" 
+              name="6. Approval-Based Sales Chart" 
+              action="action_report_approval_based"
+              parent="menu_report_category_sales" 
+              sequence="3"/>
+    
+    <!-- Action for Total Sales Chart -->
+    <record id="action_report_total_sales_chart" model="ir.actions.act_window">
+        <field name="name">Total Sales Chart</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'total_sales_chart'}</field>
+    </record>
+    
+    <menuitem id="menu_report_total_sales_chart" 
+              name="7. Total Sales Chart" 
+              action="action_report_total_sales_chart"
+              parent="menu_report_category_sales" 
+              sequence="4"/>
+    
+    <!-- Action for Daily Sales Quantity -->
+    <record id="action_report_daily_sales" model="ir.actions.act_window">
+        <field name="name">Daily Sales Quantity</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'daily_sales_quantity'}</field>
+    </record>
+    
+    <menuitem id="menu_report_daily_sales" 
+              name="10. Daily Sales Quantity" 
+              action="action_report_daily_sales"
+              parent="menu_report_category_sales" 
+              sequence="5"/>
+    
+    <!-- Action for Sales Status -->
+    <record id="action_report_sales_status" model="ir.actions.act_window">
+        <field name="name">Sales Status</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'sales_status'}</field>
+    </record>
+    
+    <menuitem id="menu_report_sales_status" 
+              name="13. Sales Status Report" 
+              action="action_report_sales_status"
+              parent="menu_report_category_sales" 
+              sequence="6"/>
+    
+    <!-- Action for Sales Exchange Rate -->
+    <record id="action_report_sales_fx" model="ir.actions.act_window">
+        <field name="name">Sales Exchange Rate Analysis</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'sales_exchange_rate'}</field>
+    </record>
+    
+    <menuitem id="menu_report_sales_fx" 
+              name="17. Sales Exchange Rate" 
+              action="action_report_sales_fx"
+              parent="menu_report_category_sales" 
+              sequence="7"/>
+    
+    <!-- ============================================ -->
+    <!-- Customer Reports Category -->
+    <!-- ============================================ -->
+    <menuitem id="menu_report_category_customer" 
+              name="Customer Reports" 
+              parent="menu_propertio_reports_center" 
+              sequence="30"/>
+    
+    <!-- Action for Customer Journey -->
+    <record id="action_report_customer_journey" model="ir.actions.act_window">
+        <field name="name">Customer Journey</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'customer_journey'}</field>
+    </record>
+    
+    <menuitem id="menu_report_customer_journey" 
+              name="3. Customer Journey" 
+              action="action_report_customer_journey"
+              parent="menu_report_category_customer" 
+              sequence="1"/>
+    
+    <!-- Action for Individual Customer Journey -->
+    <record id="action_report_customer_individual" model="ir.actions.act_window">
+        <field name="name">Individual Customer Journey</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'customer_journey_individual'}</field>
+    </record>
+    
+    <menuitem id="menu_report_customer_individual" 
+              name="20. Individual Customer Journey" 
+              action="action_report_customer_individual"
+              parent="menu_report_category_customer" 
+              sequence="2"/>
+    
+    <menuitem id="menu_report_customer_status" 
+              name="25. Customer Overall Status" 
+              action="action_report_customer_status"
+              parent="menu_report_category_customer" 
+              sequence="3"/>
+    
+    <!-- ============================================ -->
+    <!-- Financial Reports Category -->
+    <!-- ============================================ -->
+    <menuitem id="menu_report_category_finance" 
+              name="Financial Reports" 
+              parent="menu_propertio_reports_center" 
+              sequence="40"/>
+    
+    <!-- Action for Cash Register -->
+    <record id="action_report_cash_register" model="ir.actions.act_window">
+        <field name="name">Cash Register Report</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'cash_register'}</field>
+    </record>
+    
+    <menuitem id="menu_report_cash_register" 
+              name="5. Cash Register Report" 
+              action="action_report_cash_register"
+              parent="menu_report_category_finance" 
+              sequence="1"/>
+    
+    <!-- Action for Daily Cash Register -->
+    <record id="action_report_daily_cash" model="ir.actions.act_window">
+        <field name="name">Daily Cash Register</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'daily_cash_register'}</field>
+    </record>
+    
+    <menuitem id="menu_report_daily_cash" 
+              name="18. Daily Cash Register" 
+              action="action_report_daily_cash"
+              parent="menu_report_category_finance" 
+              sequence="2"/>
+    
+    <menuitem id="menu_report_cash_flow" 
+              name="11. Cash Flow Statement" 
+              action="action_report_cash_flow"
+              parent="menu_report_category_finance" 
+              sequence="3"/>
+    
+    <!-- ============================================ -->
+    <!-- Performance Reports Category -->
+    <!-- ============================================ -->
+    <menuitem id="menu_report_category_performance" 
+              name="Performance Reports" 
+              parent="menu_propertio_reports_center" 
+              sequence="50"/>
+    
+    <menuitem id="menu_report_employee_perf" 
+              name="12. Employee Performance" 
+              action="action_report_employee_performance"
+              parent="menu_report_category_performance" 
+              sequence="1"/>
+    
+    <!-- Action for End of Day Meeting -->
+    <record id="action_report_end_of_day" model="ir.actions.act_window">
+        <field name="name">End-of-Day Meeting</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'end_of_day_meeting'}</field>
+    </record>
+    
+    <menuitem id="menu_report_end_of_day" 
+              name="9. End-of-Day Meeting" 
+              action="action_report_end_of_day"
+              parent="menu_report_category_performance" 
+              sequence="2"/>
+    
+    <!-- ============================================ -->
+    <!-- Property Reports Category -->
+    <!-- ============================================ -->
+    <menuitem id="menu_report_category_property" 
+              name="Property Reports" 
+              parent="menu_propertio_reports_center" 
+              sequence="60"/>
+    
+    <!-- Action for Independent Units -->
+    <record id="action_report_independent_units" model="ir.actions.act_window">
+        <field name="name">Independent Units</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'independent_units'}</field>
+    </record>
+    
+    <menuitem id="menu_report_independent_units" 
+              name="22. Independent Units" 
+              action="action_report_independent_units"
+              parent="menu_report_category_property" 
+              sequence="1"/>
+    
+    <menuitem id="menu_report_construction" 
+              name="23. Construction Progress" 
+              action="action_report_construction_progress"
+              parent="menu_report_category_property" 
+              sequence="2"/>
+    
+    <!-- Action for Title Deed Invoice -->
+    <record id="action_report_title_deed" model="ir.actions.act_window">
+        <field name="name">Title Deed &amp; Invoice</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'title_deed_invoice'}</field>
+    </record>
+    
+    <menuitem id="menu_report_title_deed" 
+              name="21. Title Deed &amp; Invoice" 
+              action="action_report_title_deed"
+              parent="menu_report_category_property" 
+              sequence="3"/>
+    
+    <!-- ============================================ -->
+    <!-- Admin & Compliance Reports Category -->
+    <!-- ============================================ -->
+    <menuitem id="menu_report_category_admin" 
+              name="Admin &amp; Compliance" 
+              parent="menu_propertio_reports_center" 
+              sequence="70"/>
+    
+    <!-- Action for Authorization Matrix -->
+    <record id="action_report_authorization" model="ir.actions.act_window">
+        <field name="name">Authorization Matrix</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'authorization_matrix'}</field>
+    </record>
+    
+    <menuitem id="menu_report_authorization" 
+              name="16. Authorization Matrix" 
+              action="action_report_authorization"
+              parent="menu_report_category_admin" 
+              sequence="1"/>
+    
+    <!-- Action for CRM Log -->
+    <record id="action_report_crm_log" model="ir.actions.act_window">
+        <field name="name">CRM Activity Log</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'crm_log_records'}</field>
+    </record>
+    
+    <menuitem id="menu_report_crm_log" 
+              name="19. CRM Activity Log" 
+              action="action_report_crm_log"
+              parent="menu_report_category_admin" 
+              sequence="2"/>
+    
+    <!-- ============================================ -->
+    <!-- Marketing & Leads Reports Category -->
+    <!-- ============================================ -->
+    <menuitem id="menu_report_category_marketing" 
+              name="Marketing &amp; Leads" 
+              parent="menu_propertio_reports_center" 
+              sequence="80"/>
+    
+    <!-- Action for Lead Report -->
+    <record id="action_report_leads" model="ir.actions.act_window">
+        <field name="name">Lead Report</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'lead_report'}</field>
+    </record>
+    
+    <menuitem id="menu_report_leads" 
+              name="27. Lead Report" 
+              action="action_report_leads"
+              parent="menu_report_category_marketing" 
+              sequence="1"/>
+    
+    <!-- Action for Advertising Leads -->
+    <record id="action_report_advertising" model="ir.actions.act_window">
+        <field name="name">Advertising Leads</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'advertising_leads'}</field>
+    </record>
+    
+    <menuitem id="menu_report_advertising" 
+              name="28. Advertising Leads" 
+              action="action_report_advertising"
+              parent="menu_report_category_marketing" 
+              sequence="2"/>
+    
+    <!-- Action for Web Form Tracking -->
+    <record id="action_report_web_forms" model="ir.actions.act_window">
+        <field name="name">Web Form Tracking</field>
+        <field name="res_model">propertio.unified.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'web_form_tracking'}</field>
+    </record>
+    
+    <menuitem id="menu_report_web_forms" 
+              name="24. Web Form Tracking" 
+              action="action_report_web_forms"
+              parent="menu_report_category_marketing" 
+              sequence="3"/>
+</odoo>

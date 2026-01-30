@@ -2860,11 +2860,11 @@
     <!--    see test_05_reset_specific_view_controller_broken_request                                          -->
     <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <xpath expr="//script[last()]" position="before">
-        <script type="text/javascript" src="/web/static/lib/bootstrap/js/dist/util/component-functions.js"/>
-        <script type="text/javascript" src="/web/static/lib/bootstrap/js/dist/util/backdrop.js"/>
-        <script type="text/javascript" src="/web/static/lib/bootstrap/js/dist/util/focustrap.js"/>
-        <script type="text/javascript" src="/web/static/lib/bootstrap/js/dist/util/scrollbar.js"/>
-        <script type="text/javascript" src="/web/static/lib/bootstrap/js/dist/modal.js"/>
+        <script type="text/javascript" src="/web/static/lib/bootstrap/js/src/util/component-functions.js"/>
+        <script type="text/javascript" src="/web/static/lib/bootstrap/js/src/util/backdrop.js"/>
+        <script type="text/javascript" src="/web/static/lib/bootstrap/js/src/util/focustrap.js"/>
+        <script type="text/javascript" src="/web/static/lib/bootstrap/js/src/util/scrollbar.js"/>
+        <script type="text/javascript" src="/web/static/lib/bootstrap/js/src/modal.js"/>
     </xpath>
     <xpath expr="//style" position="after">
         <t t-if='view'>
@@ -3343,3 +3343,4 @@ Sitemap: <t t-out="url_root"/>sitemap.xml
     </xpath>
 </template>
 </tcrm>
+

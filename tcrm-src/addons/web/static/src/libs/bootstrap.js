@@ -1,4 +1,7 @@
 import { compensateScrollbar, getScrollingElement } from "@web/core/utils/scrolling";
+import Tooltip from "@web/bootstrap/js/src/tooltip";
+import Dropdown from "@web/bootstrap/js/src/dropdown";
+import Modal from "@web/bootstrap/js/src/modal";
 
 /**
  * The bootstrap library extensions and fixes should be done here to avoid

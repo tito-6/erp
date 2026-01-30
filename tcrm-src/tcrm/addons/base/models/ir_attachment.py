@@ -123,10 +123,11 @@ class IrAttachment(models.Model):
 
     @api.model
     def _full_path(self, path):
-        # sanitize path
+        # sanitize path and normalize separators for current OS (fixes Windows when path uses /)
         path = re.sub('[.:]', '', path)
         path = path.strip('/\\')
-        return os.path.join(self._filestore(), path)
+        path = path.replace('/', os.sep).replace('\\', os.sep)
+        return os.path.normpath(os.path.join(self._filestore(), path))
 
     @api.model
     def _get_path(self, bin_data, sha):
@@ -151,7 +152,7 @@ class IrAttachment(models.Model):
             with open(full_path, 'rb') as f:
                 return f.read(size)
         except OSError:
-            _logger.info("_read_file reading %s", full_path, exc_info=True)
+            _logger.debug("_file_read: file not found %s", full_path, exc_info=True)
         return b''
 
     @api.model

@@ -1,6 +1,6 @@
 {
     'name': 'Propertio',
-    'version': '1.0',
+    'version': '1.1',
     'category': 'Real Estate',
     'summary': 'The TCRM Real Estate Engine',
     'description': """
@@ -10,7 +10,10 @@
         - Inventory (Projects, Blocks, Units)
         - Sales & Payment Plans
         - Collections
-        - Reporting
+        - Advanced Reporting (28 report types with multi-format export)
+        
+        Export Formats: XLSX, CSV, PDF, HTML
+        All reports maintain consistent color coding and professional layouts.
     """,
     'author': 'Tcrm S.A.',
     'depends': ['base', 'web', 'mail'],
@@ -27,13 +30,15 @@
         'views/sale/propertio_sale_form.xml',
         'views/payment/propertio_payment_views.xml',
         'views/wizards/sale_wizard.xml',
+        'views/wizards/unified_report_wizard.xml',
         'views/propertio_menus_actions.xml',
         'views/propertio_reporting_views.xml',
+        'views/propertio_reports_menu.xml',
         'reports/propertio_reports.xml',
         'views/propertio_export_wizard.xml',
     ],
     'external_dependencies': {
-        'python': ['xlsxwriter'],
+        'python': ['xlsxwriter', 'reportlab'],
     },
     'application': True,
     'installable': True,

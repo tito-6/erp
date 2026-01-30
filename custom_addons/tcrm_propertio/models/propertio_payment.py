@@ -27,7 +27,7 @@ class PropertioPayment(models.Model):
     # Exchange Rate Logic
     # We store the rate used: how many [Sale Currency] units does 1 [Payment Currency] unit buy?
     # Or typically: Sale Currency Amount = Payment Amount * Rate (if rate is defined as Pay -> Sale)
-    # Let's use Odoo standard: Rate = 1 / rate in database usually.
+    # Let's use TCRM standard: Rate = 1 / rate in database usually.
     # Let's make it simple for the user: "Covered Amount in Sale Currency"
     
     exchange_rate = fields.Float(string='Exchange Rate', digits=(12, 6), help="Rate to convert Payment Currency to Sale Currency", default=1.0)
@@ -48,7 +48,7 @@ class PropertioPayment(models.Model):
             else:
                 # Fetch rate from database for payment_date
                 # We need conversion: Payment -> Sale
-                # Odoo conversion: amount_to_text = currency_id._convert(amount, sale_currency, company, date)
+                # TCRM conversion: amount_to_text = currency_id._convert(amount, sale_currency, company, date)
                 # We want the rate factor.
                 
                 # Check if we have TCMB rate integration?
